@@ -2,6 +2,8 @@ package com.list.ToDo.entity;
 
 import java.time.LocalDate;
 
+import com.list.ToDo.dto.TaskDTO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,6 +28,13 @@ public class Task {
 	
 	public Task() {
 		
+	}
+	
+	public Task(TaskDTO dto) {
+		this.name = dto.getName();
+		this.description = dto.getDescription();
+		this.status = status.PENDING;
+		this.startDate = LocalDate.now();
 	}
 	
 	public Task(long id, String name, String description, Status status, LocalDate startDate, LocalDate endDate) {
