@@ -2,12 +2,10 @@ package com.list.ToDo.entity;
 
 import com.list.ToDo.dto.UserDTO;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_user")
@@ -58,5 +56,7 @@ public class User {
 		this.password = password;
 	}
 	
-	
+	@OneToMany(mappedBy = "student")
+	private List<Task> tasks = new ArrayList<>();
+
 }
