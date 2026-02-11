@@ -4,24 +4,34 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import ch.qos.logback.core.joran.action.NewRuleAction;
+import com.list.ToDo.entity.User;
+import com.list.ToDo.repository.UserRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.list.ToDo.dto.TaskDTO;
 import com.list.ToDo.entity.Task;
 import com.list.ToDo.repository.TaskRepository;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class TaskService {
 	
 	private final TaskRepository taskRepository;
+	private final UserRepository userRepository;
 
-	public TaskService(TaskRepository taskRepository) {
+	public TaskService(TaskRepository taskRepository, UserRepository userRepository) {
 		this.taskRepository = taskRepository;
-	}
+        this.userRepository = userRepository;
+    }
 
-	public void createTask(TaskDTO dto) {
+
+	public Task createTask(long userId, TaskDTO dto) {
+		User user = userRepository.findById(userId).orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "usuario não encontrado"));
 		Task task = new Task(dto);
-		taskRepository.save(task);
+		task.setStudent(user);
+		return taskRepository.save(task);
 	}
 
 	public Optional<Task> showTaskById(long id) {

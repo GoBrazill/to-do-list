@@ -1,14 +1,8 @@
 package com.list.ToDo.controller;
 
-import java.security.DrbgParameters.Reseed;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.list.ToDo.dto.TaskDTO;
 import com.list.ToDo.service.TaskService;
@@ -25,17 +19,16 @@ public class TaskController {
 		this.taskService = taskService;
 	}
 	
-	@PostMapping("/create")
-	public ResponseEntity<?> createTask(@Valid @RequestBody TaskDTO dto) {
-		taskService.createTask(dto);
+	@PostMapping("/create/{userId}")
+	public ResponseEntity<?> createTask(@PathVariable Long userId, @Valid @RequestBody TaskDTO dto) {
 		
-		return ResponseEntity.ok("Tarefa criada com Sucesso");
+		return ResponseEntity.ok(taskService.createTask(userId, dto));
 	}
 	
-	@GetMapping("/show")
-	public ResponseEntity<?> showById(@Valid @RequestBody TaskDTO dto) {
+	@GetMapping("/show/{id}")
+	public ResponseEntity<?> showById(@PathVariable long id) {
 		
-		return ResponseEntity.ok("");
+		return ResponseEntity.ok(taskService.showTaskById(id));
 	}
 	
 	@PostMapping("/update")

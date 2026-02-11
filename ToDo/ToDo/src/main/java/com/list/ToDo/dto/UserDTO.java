@@ -16,7 +16,6 @@ public class UserDTO {
 	private String password;
 	
 	public UserDTO() {
-		super();
 	}
 
 	public UserDTO(User user) {

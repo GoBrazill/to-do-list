@@ -78,8 +78,15 @@ public class Task {
 		this.endDate = endDate;
 	}
 
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "student_id")
 	private User student;
-	
+
+	public User getStudent() {
+		return student;
+	}
+
+	public void setStudent(User student) {
+		this.student = student;
+	}
 }

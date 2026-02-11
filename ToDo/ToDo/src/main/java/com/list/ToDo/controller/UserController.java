@@ -24,7 +24,7 @@ public class UserController {
 	}
 
 	@GetMapping("show/{id}")
-	public ResponseEntity<?> showUserById(@Valid @RequestBody long id) {
+	public ResponseEntity<?> showUserById(@PathVariable long id) {
 		return ResponseEntity.ok(userService.showUserById(id));
 	}
 
@@ -33,13 +33,13 @@ public class UserController {
 		return ResponseEntity.ok(userService.showAllUsers());
 	}
 
-	@PostMapping("update/{id}")
-	public ResponseEntity<?> updateUser(@Valid @RequestBody long id, UserDTO dto) {
-		return ResponseEntity.ok(userService.updateUser(id, dto));
-	}
+//	@PostMapping("update/{id}")
+//	public ResponseEntity<?> updateUser(@Valid @RequestBody long id, UserDTO dto) {
+//		return ResponseEntity.ok(userService.updateUser(id, dto));
+//	}
 
 	@DeleteMapping("delete/{id}")
-	public ResponseEntity<?> deleteUser(@Valid @RequestBody long id) {
+	public ResponseEntity<?> deleteUser(@PathVariable long id) {
 		return ResponseEntity.ok(userService.deleteUserById(id));
 	}
 }

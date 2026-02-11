@@ -40,20 +40,20 @@ public class UserService {
 		return listUsers;
 	}
 
-	public String updateUser(long id, UserDTO dto) {
-		Optional<User> userList = userRepository.findById(id);
-
-		if (userList.isPresent()) {
-			User user = userList.get();
-			user.setNome(dto.getName());
-			user.setEmail(dto.getEmail());
-
-			return user.toString();
-		} else {
-			return "Usuario não encontrado";
-		}
-
-	}
+//	public String updateUser(long id, UserDTO dto) {
+//		Optional<User> userList = userRepository.findById(id);
+//
+//		if (userList.isPresent()) {
+//			User user = userList.get();
+//			user.setNome(dto.getName());
+//			user.setEmail(dto.getEmail());
+//
+//			return user.toString();
+//		} else {
+//			return "Usuario não encontrado";
+//		}
+//
+//	}
 
 	public String deleteUserById(long id) {
 		if(userRepository.findById(id) != null) {
